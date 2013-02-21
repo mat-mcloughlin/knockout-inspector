@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="jsonViewer.css" rel="stylesheet" />
+</head>
+<body>
+		<input data-bind="value: errorId" type="text" />
+				<input data-bind="value: test.foo.bar" type="text" />
+    <div data-bind="view: ko.toJS($root)"></div>
+<!--    <div id="testDiv" class="jsonViewer-container">
+        <span class="popup">$root</span>
+        <span class="popup">$root</span>
+    </div>-->
+</body>
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+<script src="testViewModel.js"></script>
+<script src="jsonViewer.js"></script>
+<script>
+    window.onload = function () {
+        ko.applyBindings(testViewModel);
+
+				testViewModel.subscribe(function() {
+					console.log('woop!');
+				})
+
+        document.body.addEventListener('click', ontoggle, false);
+        function ontoggle(event) {
+            var collapsed, target = event.target;
+            if (event.target.className == 'collapser') {
+                collapsed = target.parentNode.getElementsByClassName('collapsible')[0];
+                if (collapsed.parentNode.classList.contains("collapsed"))
+                    collapsed.parentNode.classList.remove("collapsed");
+                else
+                    collapsed.parentNode.classList.add("collapsed");
+            }
+        }
+
+
+    };
+</script>
+</html>
