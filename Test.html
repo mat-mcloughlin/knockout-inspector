@@ -5,8 +5,9 @@
     <link href="jsonViewer.css" rel="stylesheet" />
 </head>
 <body>
-		<input data-bind="value: errorId" type="text" />
-				<input data-bind="value: test.foo.bar" type="text" />
+	<input data-bind="value: errorId" type="text" />
+    <input data-bind="value: test.foo.bar" type="text" />
+	<input data-bind="value: items()[0].id" type="text" />
     <div data-bind="view: ko.toJS($root)"></div>
 <!--    <div id="testDiv" class="jsonViewer-container">
         <span class="popup">$root</span>

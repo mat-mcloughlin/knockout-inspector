@@ -3,7 +3,7 @@
     errorMessage: ko.computed(function() { return 'testing'; }),
     errorName: null,
 		test: { foo: { bar: ko.observable('test') } },
-    items: [
+    items: ko.observableArray([
         {
             id: 1,
             name: ko.observable("Turton Brewery Gas"),
@@ -44,5 +44,5 @@
                 calendar: null
             }
         }
-    ]
+    ])
 });

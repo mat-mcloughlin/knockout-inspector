@@ -21,20 +21,24 @@ var JsonViewer = function (element, valueAccessor, allBindingsAccessor) {
 			compare = function(newValue) {
 				recurseObject(newValue(), value);
 			},
-			recurseObject = function(obj, newObject) {
+			recurseObject = function(obj, currentObject) {
 				for (var p in obj) {
 					var unwrapped = ko.utils.unwrapObservable(obj[p]);
-					if (newObject[p]) {
-						if (newObject[p].value && (newObject[p].value != unwrapped)) 
-							newObject[p].changeCount ++;
+					if (currentObject[p]) {
+						if (currentObject[p].value && (currentObject[p].value != unwrapped)) {
+							currentObject[p].changeCount ++;
+							currentObject[p].value = unwrapped;
+                        }
+                        else {
+                            recurseObject(unwrapped, currentObject[p]);
+                        }
 					}
 					else {
 						if (typeof unwrapped == 'object') {
-							newObject[p] = { };
-				  		recurseObject(unwrapped, newObject[p]);
-						}
-				  	else
-							newObject[p] = { value: unwrapped, changeCount: 0 };
+							currentObject[p] = { };
+				  		    recurseObject(unwrapped, currentObject[p]);
+						} else
+							currentObject[p] = { value: unwrapped, changeCount: 0 };
 					}
 				}
 			};
