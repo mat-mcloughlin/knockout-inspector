@@ -7,8 +7,8 @@
 <body>
 	<input data-bind="value: errorId" type="text" />
     <input data-bind="value: test.foo.bar" type="text" />
-	<input data-bind="value: items()[0].id" type="text" />
-    <div data-bind="view: ko.toJS($root)"></div>
+	<input data-bind="value: items()[0].name" type="text" />
+    <div data-bind="jsonViewer: $root"></div>
 <!--    <div id="testDiv" class="jsonViewer-container">
         <span class="popup">$root</span>
         <span class="popup">$root</span>
@@ -20,24 +20,6 @@
 <script>
     window.onload = function () {
         ko.applyBindings(testViewModel);
-
-				testViewModel.subscribe(function() {
-					console.log('woop!');
-				})
-
-        document.body.addEventListener('click', ontoggle, false);
-        function ontoggle(event) {
-            var collapsed, target = event.target;
-            if (event.target.className == 'collapser') {
-                collapsed = target.parentNode.getElementsByClassName('collapsible')[0];
-                if (collapsed.parentNode.classList.contains("collapsed"))
-                    collapsed.parentNode.classList.remove("collapsed");
-                else
-                    collapsed.parentNode.classList.add("collapsed");
-            }
-        }
-
-
     };
 </script>
 </html>

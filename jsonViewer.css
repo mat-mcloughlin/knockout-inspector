@@ -61,8 +61,8 @@
         color: gray;
     }
 
-    .jsonViewer .type-boolean {
-        color: firebrick;
+        .jsonViewer .type-boolean {
+            color: firebrick;
     }
 
     .jsonViewer .type-number {
@@ -109,4 +109,11 @@
         padding-right: 6px;
         padding-left: 6px;
         cursor: pointer;
+    }
+
+    .jsonViewer .change-counter {
+        background: firebrick;
+        color: #FFF;
+        padding: 1px;
+        margin-right: 2px;
     }
