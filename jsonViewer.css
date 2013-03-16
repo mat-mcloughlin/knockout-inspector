@@ -57,12 +57,17 @@
         font-weight: bold;
     }
 
+		.jsonViewer .property.nonObservable {
+			color: #808080;
+			font-weight: normal;
+		}
+
     .jsonViewer .type-null {
         color: gray;
     }
 
-        .jsonViewer .type-boolean {
-            color: firebrick;
+    .jsonViewer .type-boolean {
+    		color: firebrick;
     }
 
     .jsonViewer .type-number {

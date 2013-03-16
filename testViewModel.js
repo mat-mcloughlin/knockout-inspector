@@ -1,8 +1,12 @@
 ﻿var testViewModel = ko.observable({
+		doIt: function() {
+			this.parent({ child: ko.observable('the') });
+			return false;
+		},
     errorId: ko.observable(1),
     errorMessage: ko.computed(function() { return 'testing'; }),
-    errorName: null,
-		test: { foo: { bar: ko.observable('test') } },
+		test: ko.observable({ foo: { bar: ko.observable('test') } }),
+		parent: ko.observable({ child: ko.observable('test') }),
     items: ko.observableArray([
         {
             id: 1,
