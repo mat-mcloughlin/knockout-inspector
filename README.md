@@ -15,4 +15,6 @@ And then you have access to the jsonViewer binding. You can apply it to any prop
 
     <div data-bind="jsonViewer: $root"></div>
   
-This will output the object to the page, simple.
+This will output the object to the page, simple. oh and here are some examples
+
+[examples](http://jsfiddle.net/mjmcloug/4F4VX/3/)
