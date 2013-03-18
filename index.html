@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>index</title>
+    <link href="jsonViewer.css" rel="stylesheet" />
+</head>
+<body>
+	<div data-bind="jsonViewer: $root"></div>
+</body>
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+<script src="testViewModel.js"></script>
+<script src="jsonViewer.dirtyFlag.js"></script>
+<script src="jsonViewer.comparer.js"></script>
+<script src="jsonViewer.renderer.js"></script>
+<script src="jsonViewer.bindingHandler.js"></script>
+<script>
+    window.onload = function () {
+        ko.applyBindings(testViewModel);
+    };
+</script>
+</html>
