@@ -271,6 +271,80 @@ test('handles computed getting updated', function() {
 	equal(comparer.object.foo.isObservable, true);
 });
 
+test('observable keeps track of number of subscribers', function() {
+
+	var object = {
+		foo: ko.observable('bar')
+	};
+	
+	var comparer = new jsonViewer.Comparer();
+	comparer.compare(object);
+	
+	equal(comparer.object.foo.subscribers, 0);
+});
+
+test('observable keeps track of 1 subscribers', function() {
+
+	var object = {
+		foo: ko.observable('bar')
+	};
+	
+	object.foo.subscribe(function() {
+		return 'test';
+	});
+	
+	var comparer = new jsonViewer.Comparer();
+	comparer.compare(object);
+	
+	equal(comparer.object.foo.subscribers, 1);
+});
+
+test('observable keeps track of 2 subscribers', function() {
+
+	var object = {
+		foo: ko.observable('bar')
+	};
+	
+	object.foo.subscribe(function() {
+		return 'test';
+	});
+	
+	object.foo.subscribe(function() {
+		return 'test';
+	});
+	
+	var comparer = new jsonViewer.Comparer();
+	comparer.compare(object);
+	
+	equal(comparer.object.foo.subscribers, 2);
+});
+
+test('observable keeps track of 2 subscribers', function() {
+
+	var object = {
+		foo: ko.observable('bar')
+	};
+	
+	object.foo.subscribe(function() {
+		return 'test';
+	});
+	
+	var comparer = new jsonViewer.Comparer();
+	comparer.compare(object);
+	
+	object.foo.subscribe(function() {
+		return 'test 2';
+	});
+	
+	comparer.compare(object);
+	
+	equal(comparer.object.foo.subscribers, 2);
+});
+
+
+
+
+
 // Check adding a new object
 // Check deleting an object
 

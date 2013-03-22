@@ -64,6 +64,7 @@ jsonViewer.renderer = function() {
 				else output += '<li><div class="hoverable nonObservable">';
 
 				if (json[key] && json[key].hasOwnProperty('count') && json[key].count > 0) output += '<span class="change-counter">' + json[key].count + '</span>'
+				if (json[key] && json[key].hasOwnProperty('subscribers') && json[key].subscribers - 2 > 0) output += '<span class="subscriber-counter">' + (Number(json[key].subscribers) - 2) + '</span>'
 				
 				debugger;
 				var css = 'property ' + (json[key] && json[key].isObservable ? '' : 'nonObservable');

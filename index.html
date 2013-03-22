@@ -15,6 +15,14 @@
 <script src="jsonViewer.bindingHandler.js"></script>
 <script>
     window.onload = function () {
+				debugger;
+				testViewModel().errorId.subscribe(function() {
+					console.log('test');
+				});
+				
+				testViewModel().errorId.subscribe(function() {
+					console.log('test');
+				});
         ko.applyBindings(testViewModel);
     };
 </script>

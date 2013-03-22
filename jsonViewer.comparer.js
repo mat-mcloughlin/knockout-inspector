@@ -57,6 +57,7 @@ jsonViewer.Comparer = function() {
 								object[p].isObservable = true;
 							}
 						}
+						object[p].subscribers = ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0;
 					} else {
 						var unwrapped = ko.utils.unwrapObservable(newObject[p]);
 						parseObject(unwrapped, newObject, object, p);
@@ -84,18 +85,21 @@ jsonViewer.Comparer = function() {
 		},
 
 		parseObject = function(unwrapped, newObject, object, p) {
+			debugger;
 			if (isObject(unwrapped)) {
 				object[p] = {
 					value: {},
 					count: 0,
-					isObservable: ko.isObservable(newObject[p])
+					isObservable: ko.isObservable(newObject[p]),
+					subscribers: ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0
 				};
 				recurse(unwrapped, object[p].value);
 			} else {
 				object[p] = {
 					value: unwrapped,
 					count: 0,
-					isObservable: ko.isObservable(newObject[p])
+					isObservable: ko.isObservable(newObject[p]),
+					subscribers: ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0
 				}
 			};
 		};

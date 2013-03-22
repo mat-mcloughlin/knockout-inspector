@@ -122,3 +122,10 @@
         padding: 1px;
         margin-right: 2px;
     }
+
+    .jsonViewer .subscriber-counter {
+        background: green;
+        color: #FFF;
+        padding: 1px;
+        margin-right: 2px;
+    }
