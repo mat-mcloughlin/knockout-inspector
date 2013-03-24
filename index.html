@@ -4,6 +4,7 @@
     <title>index</title>
 </head>
 <body>
+	<input data-bind="value: testViewModel().errorId" />
 	<div data-bind="jsonViewer: $root"></div>
 </body>
 <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
@@ -15,7 +16,6 @@
 <script src="jsonViewer.css.js"></script>
 <script>
     window.onload = function () {
-				debugger;
 				testViewModel().errorId.subscribe(function() {
 					console.log('test');
 				});
