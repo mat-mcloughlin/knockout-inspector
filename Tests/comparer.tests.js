@@ -280,7 +280,7 @@ test('observable keeps track of number of subscribers', function() {
 	var comparer = new jsonViewer.Comparer();
 	comparer.compare(object);
 	
-	equal(comparer.object.foo.subscribers, 0);
+	equal(comparer.object.foo.subscribers, 1);
 });
 
 test('observable keeps track of 1 subscribers', function() {
@@ -296,7 +296,7 @@ test('observable keeps track of 1 subscribers', function() {
 	var comparer = new jsonViewer.Comparer();
 	comparer.compare(object);
 	
-	equal(comparer.object.foo.subscribers, 1);
+	equal(comparer.object.foo.subscribers, 2);
 });
 
 test('observable keeps track of 2 subscribers', function() {
@@ -316,7 +316,7 @@ test('observable keeps track of 2 subscribers', function() {
 	var comparer = new jsonViewer.Comparer();
 	comparer.compare(object);
 	
-	equal(comparer.object.foo.subscribers, 2);
+	equal(comparer.object.foo.subscribers, 3);
 });
 
 test('observable keeps track of 2 subscribers', function() {
@@ -338,7 +338,7 @@ test('observable keeps track of 2 subscribers', function() {
 	
 	comparer.compare(object);
 	
-	equal(comparer.object.foo.subscribers, 2);
+	equal(comparer.object.foo.subscribers, 3);
 });
 
 

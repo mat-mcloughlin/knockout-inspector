@@ -57,7 +57,9 @@ jsonViewer.Comparer = function() {
 								object[p].isObservable = true;
 							}
 						}
-						object[p].subscribers = ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0;
+						if (object[p]) {
+							object[p].subscribers = ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0;	
+						}
 					} else {
 						var unwrapped = ko.utils.unwrapObservable(newObject[p]);
 						parseObject(unwrapped, newObject, object, p);
