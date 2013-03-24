@@ -2,6 +2,7 @@
 	bindingHandler: {},
 	init: function(element, valueAccessor, allBindingsAccessor) {
 		this.bindingHandler = new jsonViewer.BindingHandler(element, valueAccessor, allBindingsAccessor);
+		this.bindingHandler.addStyle();
 	},
 	update: function(element, valueAccessor, allBindingsAccessor) {
 		this.bindingHandler.compare(valueAccessor());
@@ -23,12 +24,24 @@ jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor
 		return propertyString;
 	},
 	
+	addStyle = function() {
+		if (document.getElementById('jsonViewerCss') === null) {
+			var style = document.createElement('style');
+			style.type = 'text/css';
+			style.rel = 'stylesheet'
+			style.innerHTML = jsonViewer.css;
+			style.id = 'jsonViewerCss'
+			document.getElementsByTagName('head')[0].appendChild(style);	
+		};
+	},
+	
 	render = function() {
 		return jsonViewer.renderer(this.object, this.rootName());
 	};
 	
 	return {
 		rootName: rootName,
+		addStyle: addStyle,
 		compare: comparer.compare,
 		object: comparer.object,
 		render: render
