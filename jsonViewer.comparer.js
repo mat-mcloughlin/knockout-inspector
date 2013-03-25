@@ -27,7 +27,7 @@ jsonViewer.Comparer = function() {
 		},
 
 		resetDirtyFlag = function(object) {
-			object.isDirty = new jsonViewer.DirtyFlag(object);
+			object.isDirty(false);
 		},
 
 		compare = function(newObject) {
@@ -58,7 +58,7 @@ jsonViewer.Comparer = function() {
 							}
 						}
 						if (object[p]) {
-							object[p].subscribers = ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() - object[p].count : 0;	
+							object[p].subscribers = ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0;	
 						}
 					} else {
 						var unwrapped = ko.utils.unwrapObservable(newObject[p]);
