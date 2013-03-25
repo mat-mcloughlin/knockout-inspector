@@ -31,8 +31,8 @@ jsonViewer.Comparer = function() {
 		},
 
 		compare = function(newObject) {
-			addDirtyFlags(newObject);
-			recurse(newObject, this.object);
+			addDirtyFlags(ko.utils.unwrapObservable(newObject));
+			recurse(ko.utils.unwrapObservable(newObject), this.object);
 		},
 
 		recurse = function(newObject, object) {

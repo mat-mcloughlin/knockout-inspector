@@ -1,5 +1,4 @@
 .jsonViewer {
-    margin-bottom: 23px;
     white-space: normal !important;
     font-family: monospace;
     display: inline-block;
@@ -95,7 +94,7 @@
     }
 
     .jsonViewer .collapsible {
-        margin-left: 2em;
+        margin-left: 1.4em;
     }
 
     .jsonViewer .hoverable {

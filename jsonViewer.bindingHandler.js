@@ -1,19 +1,75 @@
 ﻿ko.bindingHandlers.jsonViewer = {
 	bindingHandler: {},
 	init: function(element, valueAccessor, allBindingsAccessor) {
-		this.bindingHandler = new jsonViewer.BindingHandler(element, valueAccessor, allBindingsAccessor);
-		this.bindingHandler.addStyle();
+		if (jsonViewer.elementId === undefined || element.id === jsonViewer.elementId) {
+			this.bindingHandler = new jsonViewer.BindingHandler(element, valueAccessor, allBindingsAccessor);
+
+			var guid = jsonViewer.renderer.guid();
+			jsonViewer.elementId = 'jsonViewer-' + guid;
+			element.id = jsonViewer.elementId;
+	 		
+	 		document.body.addEventListener('click', jsonViewer.renderer.onToggle, false);
+
+	 		if (allBindingsAccessor().pinToTop) {
+	 			jsonViewer.renderer.pinToTop(element);	
+	 		};
+			
+			this.bindingHandler.addStyle();
+		} else {
+			console.log('jsonViewer: only one jsonViewer allowed');
+		}
 	},
 	update: function(element, valueAccessor, allBindingsAccessor) {
-		this.bindingHandler.compare(valueAccessor());
-		var jsonHtml = this.bindingHandler.render();
-		element.innerHTML = jsonHtml;
+		if (jsonViewer.elementId === undefined || element.id === jsonViewer.elementId) {
+			this.bindingHandler.compare(valueAccessor());
+			var jsonHtml = this.bindingHandler.render();
+			element.innerHTML = jsonHtml;
+		}
 	}
 };
+
+
+/* automatically attach it */
+function startClock(){
+	var scripts = document.getElementsByTagName('script');
+	var thisScriptTag = document.getElementsByTagName('script')[ scripts.length - 1 ];
+	var script;
+
+	var settings;
+	for (var i = scripts.length - 1; i >= 0; i--) {
+		if (scripts[i].getAttribute('data-jsonViewer')) {
+			script = scripts[i];
+			settings = eval('settings = {' + scripts[i].getAttribute('data-jsonViewer') + '}');
+		}
+	}
+
+	if (settings && settings.observable) {
+		var dataBindString = 'jsonViewer: ' + settings.observable;
+
+		if (settings.pinToTop) {
+			dataBindString += ', pinToTop: true';
+		};
+
+		var div = document.createElement('div');
+		div.setAttribute('data-bind', dataBindString);
+		script.parentNode.insertBefore(div, script.nextSibling);
+	 //   document.getElementsByTagName('body')[0].appendChild(div);	
+	}
+};
+
+if(window.addEventListener){
+    window.addEventListener('load',startClock,false); //W3C
+}
+else{
+    window.attachEvent('onload',startClock); //IE
+}
+
 
 if (typeof jsonViewer == 'undefined') {
 	jsonViewer = {};
 }
+
+jsonViewer.elementId;
 
 jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor) {
 	var comparer = jsonViewer.Comparer(),
@@ -36,7 +92,7 @@ jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor
 	},
 	
 	render = function() {
-		return jsonViewer.renderer(this.object, this.rootName());
+		return jsonViewer.renderer.jsonToHtml(this.object, this.rootName());
 	};
 	
 	return {
@@ -48,12 +104,3 @@ jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor
 	};
 };
 
-// var ontoggle = function(event) {
-// 	var collapsed, target = event.target;
-// 	if (event.target.className == 'collapser') {
-// 		collapsed = target.parentNode.getElementsByClassName('collapsible')[0];
-// 		if (collapsed.parentNode.classList.contains("collapsed")) collapsed.parentNode.classList.remove("collapsed");
-// 		else collapsed.parentNode.classList.add("collapsed");
-// 	}
-// 
-// document.body.addEventListener('click', ontoggle, false);
