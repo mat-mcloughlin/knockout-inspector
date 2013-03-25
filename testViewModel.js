@@ -4,6 +4,7 @@
 			return false;
 		},
     errorId: ko.observable(1),
+    testZero: ko.observable(0),
     errorMessage: ko.computed(function() { return 'testing'; }),
 		test: ko.observable({ foo: { bar: ko.observable('test') } }),
 		parent: ko.observable({ child: ko.observable('test') }),

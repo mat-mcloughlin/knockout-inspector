@@ -16,7 +16,8 @@ jsonViewer.renderer = function() {
 	},
 
 	getValue = function(value) {
-		if (value && value.value) return value;
+		if (value && value.hasOwnProperty('value')) 
+			return value;
 		else return {
 			value: value,
 			count: 0
