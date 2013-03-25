@@ -27,6 +27,7 @@ fs.readFile(stylesheetFile, 'utf8', function(err, data) {
 			namespace + '.css.js ' + 
 			namespace + '.dirtyFlag.js ' +
 			namespace + '.renderer.js ' +
+			namespace + '.guid.js ' +
 			'-o ' + namespace + '.js');
     }
 	});

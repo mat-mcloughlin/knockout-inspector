@@ -4,7 +4,7 @@
 		if (jsonViewer.elementId === undefined || element.id === jsonViewer.elementId) {
 			this.bindingHandler = new jsonViewer.BindingHandler(element, valueAccessor, allBindingsAccessor);
 
-			var guid = jsonViewer.renderer.guid();
+			var guid = jsonViewer.guid.create();
 			jsonViewer.elementId = 'jsonViewer-' + guid;
 			element.id = jsonViewer.elementId;
 	 		
@@ -24,6 +24,7 @@
 			this.bindingHandler.compare(valueAccessor());
 			var jsonHtml = this.bindingHandler.render();
 			element.innerHTML = jsonHtml;
+			this.bindingHandler.setState();
 		}
 	}
 };
@@ -53,7 +54,6 @@ function startClock(){
 		var div = document.createElement('div');
 		div.setAttribute('data-bind', dataBindString);
 		script.parentNode.insertBefore(div, script.nextSibling);
-	 //   document.getElementsByTagName('body')[0].appendChild(div);	
 	}
 };
 
@@ -100,7 +100,8 @@ jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor
 		addStyle: addStyle,
 		compare: comparer.compare,
 		object: comparer.object,
-		render: render
+		render: render,
+		setState: jsonViewer.renderer.setState
 	};
 };
 

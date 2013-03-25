@@ -29,9 +29,9 @@ jsonViewer.renderer = function() {
 			output = "";
 
 		if (value.value == null) output += decorateWithSpan("null", "type-null");
-		else if (value.value && value.value.constructor == Array) output += arrayToHtml(value.value);
+		else if (value.value && value.value.constructor == Array) output += arrayToHtml(value.value, value.guid);
 		else if (valueType == "object" && value.value.getMonth) output += stringToHtml(value.value.toString());
-		else if (valueType == "object") output += objectToHtml(value.value);
+		else if (valueType == "object") output += objectToHtml(value.value, value.guid);
 		else if (valueType == "number") output += decorateWithSpan(value.value, "type-number");
 		else if (valueType == "string") output += stringToHtml(value.value);
 		else if (valueType == "boolean") output += decorateWithSpan(value.value, "type-boolean");
@@ -47,8 +47,8 @@ jsonViewer.renderer = function() {
 		return output;
 	},
 
-	arrayToHtml = function(json) {
-		var i, length, output = '<div data-collapser="jsonViewer-' + guid() + '" class="collapser "></div>[<span class="ellipsis"></span><ul class="array collapsible">',
+	arrayToHtml = function(json, guid) {
+		var i, length, output = '<div data-collapser="jsonViewer-' + guid + '" class="collapser "></div>[<span class="ellipsis"></span><ul class="array collapsible">',
 			hasContents = false;
 		for (i = 0, length = json.length; i < length; i++) {
 			hasContents = true;
@@ -62,9 +62,10 @@ jsonViewer.renderer = function() {
 		return output;
 	},
 
-	objectToHtml = function(json) {
+	objectToHtml = function(json, guid) {
 		var i, key, length, keys = Object.keys(json),
-			output = '<div data-collapser="jsonViewer-' + guid() + '" class="collapser"></div>{<span class="ellipsis"></span><ul class="obj collapsible">',
+			output = '<div data-collapser="jsonViewer-' + guid + '" class="collapser';
+			output += '"></div>{<span class="ellipsis"></span><ul class="obj collapsible">',
 			hasContents = false;
 		for (i = 0, length = keys.length; i < length; i++) {
 			key = keys[i];
@@ -103,9 +104,9 @@ jsonViewer.renderer = function() {
 		element.style.left = 0;
 		element.style.background ='#FFF';
 		element.style.border = 'solid 1px #000';
-		element.style['-moz-box-shadow'] = '0 0 8px 8px #CCC';
-		element.style['-webkit-box-shadow'] = '0 0 8px 8px #CCC';
-		element.style['box-shadow'] = '0 0 8px 8px #CCC';
+		element.style['-moz-box-shadow'] = '4px 4px 4px 0 #CCC';
+		element.style['-webkit-box-shadow'] = '4px 4px 4px 0 #CCC';
+		element.style['box-shadow'] = '4px 4px 4px 0 #CCC';
 	},
 
 	onToggle = function(event) {
@@ -121,24 +122,27 @@ jsonViewer.renderer = function() {
 				state[guid] = 'collapsed';
 				collapsed.parentNode.classList.add("collapsed");
 			}
+
+			console.log(state);
 		}
 	},
 
-	s4 = function() {
-  		return Math.floor((1 + Math.random()) * 0x10000)
-         	.toString(16)
-         	.substring(1);
-	},
+	setState = function() {
+		var collapsers = document.getElementsByClassName('collapser');
+		for (var i = collapsers.length - 1; i >= 0; i--) {
+			var collapsed = collapsers[i].parentNode.getElementsByClassName('collapsible')[0];
+			if (state[collapsers[i].getAttribute('data-collapser')] && state[collapsers[i].getAttribute('data-collapser')] === 'collapsed') {
+				collapsed.parentNode.classList.add("collapsed");
+			}
 
-	guid = function() {
-  		return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-         s4() + '-' + s4() + s4() + s4();
+		};
+	
 	};
 
 	return {
 		jsonToHtml: jsonToHtml,
 		pinToTop: pinToTop,
 		onToggle: onToggle,
-		guid: guid
+		setState: setState,
 	};
 }();
