@@ -31,7 +31,6 @@
 
 
 /* automatically attach it */
-function startClock(){
 	var scripts = document.getElementsByTagName('script');
 	var thisScriptTag = document.getElementsByTagName('script')[ scripts.length - 1 ];
 	var script;
@@ -56,14 +55,6 @@ function startClock(){
 		script.parentNode.insertBefore(div, script.nextSibling);
 	}
 };
-
-if(window.addEventListener){
-    window.addEventListener('load',startClock,false); //W3C
-}
-else{
-    window.attachEvent('onload',startClock); //IE
-}
-
 
 if (typeof jsonViewer == 'undefined') {
 	jsonViewer = {};
