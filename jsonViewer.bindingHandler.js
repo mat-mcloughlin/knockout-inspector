@@ -54,7 +54,6 @@
 		div.setAttribute('data-bind', dataBindString);
 		script.parentNode.insertBefore(div, script.nextSibling);
 	}
-};
 
 if (typeof jsonViewer == 'undefined') {
 	jsonViewer = {};
