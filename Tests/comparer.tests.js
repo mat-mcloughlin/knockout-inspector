@@ -6,7 +6,7 @@ test('object with one child', 4, function() {
 		foo: 'bar'
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.id.value, 1);
@@ -21,7 +21,7 @@ test('object with one child observable', 4, function() {
 		foo: ko.observable('bar')
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.id.value, 1);
@@ -35,7 +35,7 @@ test('object with multiple children', 3, function() {
 		foo: { bar: 'test' }
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.value.bar.value, 'test');
@@ -48,7 +48,7 @@ test('object with multiple children that is observable', 5, function() {
 		foo: ko.observable({ bar: ko.observable('test') })
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.count, 0);
@@ -63,7 +63,7 @@ test('array', 5, function() {
 		foo: [ 1, 2, 3 ]
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.count, 0);
@@ -79,7 +79,7 @@ test('array with an observable', 1, function() {
 		foo: [ 1, ko.observable(2), 3 ]
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.value[1].isObservable, true);
@@ -90,7 +90,7 @@ test('array of objects', 3, function() {
 		foo: [{ bar: 1 }, { bar: 2 }]
 	};
 
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 
 	equal(comparer.object.foo.value[0].value.bar.value, 1);
@@ -103,7 +103,7 @@ test('date', 3, function() {
 		foo: new Date()
 	};
 
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 
 	ok(comparer.object.foo.value.getMonth);
@@ -119,7 +119,7 @@ test('object with one child', 6, function() {
 		foo: 'bar updated'
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.object = {
 		id: { value: 1, count: 0, isObservable: false },
 		foo: { value: 'bar', count: 0, isObservable: false }
@@ -139,7 +139,7 @@ test('object with one child observable', 3, function() {
 		foo: ko.observable('bar')
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.addDirtyFlags(object);
 	comparer.compare(object);
 	object.foo('bar updated');
@@ -155,7 +155,7 @@ test('object with multiple children', 3, function() {
 		foo: { bar: 'test updated' }
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.object = {
 		foo: { value: { bar: { value: 'test', count: 0, isObservable: false} }, count: 0, isObservable: false }
 	};
@@ -174,7 +174,7 @@ test('dirty flag gets added to observables', function() {
 		bar: 'test'
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.addDirtyFlags(object);
 	
 	equal(typeof object.foo.isDirty, 'function');
@@ -186,7 +186,7 @@ test('dirty flag gets added to child observables', function() {
 		foo: ko.observable({ bar: ko.observable('test') })
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.addDirtyFlags(object);
 	
 	equal(typeof object.foo.isDirty, 'function');
@@ -198,7 +198,7 @@ test('observable child counter gets reset when parent is updated', function() {
 		foo: ko.observable({ bar: ko.observable('test') })
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	object.foo().bar('test updated');
 	comparer.compare(object);
@@ -218,7 +218,7 @@ test('handles null object', function() {
 		foo: null
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.count, 0);
@@ -231,7 +231,7 @@ test('handles function', function() {
 		foo: function() { return 'test'}
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.count, 0);
@@ -244,7 +244,7 @@ test('handles computed', function() {
 		foo: ko.computed(function() { return 'test' })
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.count, 0);
@@ -261,7 +261,7 @@ test('handles computed getting updated', function() {
 		})
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	bar('updated')
 	comparer.compare(object)
@@ -277,7 +277,7 @@ test('observable keeps track of number of subscribers', function() {
 		foo: ko.observable('bar')
 	};
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.subscribers, 1);
@@ -293,7 +293,7 @@ test('observable keeps track of 1 subscribers', function() {
 		return 'test';
 	});
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.subscribers, 2);
@@ -313,7 +313,7 @@ test('observable keeps track of 2 subscribers', function() {
 		return 'test';
 	});
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	equal(comparer.object.foo.subscribers, 3);
@@ -329,7 +329,7 @@ test('observable keeps track of 2 subscribers', function() {
 		return 'test';
 	});
 	
-	var comparer = new jsonViewer.Comparer();
+	var comparer = new koInspector.Comparer();
 	comparer.compare(object);
 	
 	object.foo.subscribe(function() {

@@ -1,8 +1,8 @@
-if (typeof jsonViewer == 'undefined') {
-	jsonViewer = {};
+if (typeof koInspector == 'undefined') {
+	koInspector = {};
 }
 
-jsonViewer.Comparer = function() {
+koInspector.Comparer = function() {
 	var storedObject = {},
 
 	addDirtyFlags = function(newObject) {
@@ -10,7 +10,7 @@ jsonViewer.Comparer = function() {
 			if (ko.isObservable(newObject[p])) {
 
 				if (typeof newObject[p].isDirty === 'undefined') {
-					newObject[p].isDirty = new jsonViewer.DirtyFlag(newObject[p]);
+					newObject[p].isDirty = new koInspector.DirtyFlag(newObject[p]);
 				}
 			}
 
@@ -93,7 +93,7 @@ jsonViewer.Comparer = function() {
 				count: 0,
 				isObservable: ko.isObservable(newObject[p]),
 				subscribers: ko.isObservable(newObject[p]) ? newObject[p].getSubscriptionsCount() : 0,
-				guid: jsonViewer.guid.create()
+				guid: koInspector.guid.create()
 			};
 			recurse(unwrapped, object[p].value);
 		} else {

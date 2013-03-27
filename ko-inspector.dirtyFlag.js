@@ -1,8 +1,8 @@
-if (typeof jsonViewer == 'undefined') {
-  jsonViewer = {};
+if (typeof koInspector == 'undefined') {
+  koInspector = {};
 }
 
-jsonViewer.DirtyFlag = function(root) {
+koInspector.DirtyFlag = function(root) {
 	var isDirty = ko.observable(false);
 	
     root.subscribe(function() {

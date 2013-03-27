@@ -1,26 +1,26 @@
-﻿ko.bindingHandlers.jsonViewer = {
+﻿ko.bindingHandlers.inspect = {
 	bindingHandler: {},
 	init: function(element, valueAccessor, allBindingsAccessor) {
-		if (jsonViewer.elementId === undefined || element.id === jsonViewer.elementId) {
-			this.bindingHandler = new jsonViewer.BindingHandler(element, valueAccessor, allBindingsAccessor);
+		if (koInspector.elementId === undefined || element.id ===  koInspector.elementId) {
+			this.bindingHandler = new koInspector.BindingHandler(element, valueAccessor, allBindingsAccessor);
 
-			var guid = jsonViewer.guid.create();
-			jsonViewer.elementId = 'jsonViewer-' + guid;
-			element.id = jsonViewer.elementId;
+			var guid = koInspector.guid.create();
+			koInspector.elementId = 'ko-inspector-' + guid;
+			element.id = koInspector.elementId;
 	 		
-	 		document.body.addEventListener('click', jsonViewer.renderer.onToggle, false);
+	 		document.body.addEventListener('click', koInspector.renderer.onToggle, false);
 
 	 		if (allBindingsAccessor().pinToTop) {
-	 			jsonViewer.renderer.pinToTop(element);	
+	 			koInspector.renderer.pinToTop(element);	
 	 		};
 			
 			this.bindingHandler.addStyle();
 		} else {
-			console.log('jsonViewer: only one jsonViewer allowed');
+			console.log('ko-inspector: only one inspect allowed');
 		}
 	},
 	update: function(element, valueAccessor, allBindingsAccessor) {
-		if (jsonViewer.elementId === undefined || element.id === jsonViewer.elementId) {
+		if (koInspector.elementId === undefined || element.id === koInspector.elementId) {
 			this.bindingHandler.compare(valueAccessor());
 			var jsonHtml = this.bindingHandler.render();
 			element.innerHTML = jsonHtml;
@@ -37,14 +37,14 @@
 
 	var settings;
 	for (var i = scripts.length - 1; i >= 0; i--) {
-		if (scripts[i].getAttribute('data-jsonViewer')) {
+		if (scripts[i].getAttribute('data-inspect')) {
 			script = scripts[i];
-			settings = eval('settings = {' + scripts[i].getAttribute('data-jsonViewer') + '}');
+			settings = eval('settings = {' + scripts[i].getAttribute('data-inspect') + '}');
 		}
 	}
 
 	if (settings && settings.observable) {
-		var dataBindString = 'jsonViewer: ' + settings.observable;
+		var dataBindString = 'inspect: ' + settings.observable;
 
 		if (settings.pinToTop) {
 			dataBindString += ', pinToTop: true';
@@ -55,34 +55,34 @@
 		script.parentNode.insertBefore(div, script.nextSibling);
 	}
 
-if (typeof jsonViewer == 'undefined') {
-	jsonViewer = {};
+if (typeof koInspector == 'undefined') {
+	koInspector = {};
 }
 
-jsonViewer.elementId;
+koInspector.elementId;
 
-jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor) {
-	var comparer = jsonViewer.Comparer(),
+koInspector.BindingHandler = function(element, valueAccessor, allBindingsAccessor) {
+	var comparer = koInspector.Comparer(),
 	
 	rootName = function() {
-		var propertyString = allBindingsAccessor()._ko_property_writers.jsonViewer.toString();
+		var propertyString = allBindingsAccessor()._ko_property_writers.inspect.toString();
 		propertyString = propertyString.substring(24).replace(' = __ko_value; }', '');
 		return propertyString;
 	},
 	
 	addStyle = function() {
-		if (document.getElementById('jsonViewerCss') === null) {
+		if (document.getElementById('ko-inspector-css') === null) {
 			var style = document.createElement('style');
 			style.type = 'text/css';
 			style.rel = 'stylesheet'
-			style.innerHTML = jsonViewer.css;
-			style.id = 'jsonViewerCss'
+			style.innerHTML = koInspector.css;
+			style.id = 'ko-inspector-css'
 			document.getElementsByTagName('head')[0].appendChild(style);	
 		};
 	},
 	
 	render = function() {
-		return jsonViewer.renderer.jsonToHtml(this.object, this.rootName());
+		return koInspector.renderer.jsonToHtml(this.object, this.rootName());
 	};
 	
 	return {
@@ -91,7 +91,7 @@ jsonViewer.BindingHandler = function(element, valueAccessor, allBindingsAccessor
 		compare: comparer.compare,
 		object: comparer.object,
 		render: render,
-		setState: jsonViewer.renderer.setState
+		setState: koInspector.renderer.setState
 	};
 };
 

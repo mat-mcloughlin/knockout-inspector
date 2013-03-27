@@ -4,17 +4,17 @@
     <title>index</title>
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
 <script src="testViewModel.js"></script>
-<script src="jsonViewer.dirtyFlag.js"></script>
-<script src="jsonViewer.comparer.js"></script>
-<script src="jsonViewer.renderer.js"></script>
-<script src="jsonViewer.guid.js"></script>
-<script src="jsonViewer.bindingHandler.js"></script>
-<script src="jsonViewer.css.js"></script>
+<script src="ko-inspector.dirtyFlag.js"></script>
+<script src="ko-inspector.comparer.js"></script>
+<script src="ko-inspector.renderer.js"></script>
+<script src="ko-inspector.guid.js"></script>
+<script src="ko-inspector.bindingHandler.js"></script>
+<script src="ko-inspector.css.js"></script>
 </head>
 <body>
 	<input data-bind="value: testViewModel().errorId" />
 	
-<script src="jsonViewer.bindingHandler.js" data-jsonViewer="observable: '$root', pinToTop: false"></script>
+<script src="ko-inspector.bindingHandler.js" data-inspect="observable: '$root', pinToTop: false"></script>
 	
 </body>
 

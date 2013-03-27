@@ -1,8 +1,9 @@
 var fs = require('fs'),
 	exec = require('child_process').exec,
-	namespace = 'jsonViewer',
-	stylesheetFile = namespace + '.css',
-	cssFile = namespace + '.css.js';
+	namespace = 'koInspector',
+	file = 'ko-inspector'
+	stylesheetFile = file + '.css',
+	cssFile = file + '.css.js';
 
 var cssFileStart = 	"if (typeof " + namespace + " == 'undefined') { " + namespace + " = {};	} " + namespace + ".css='",
 	cssFileEnd = "';";
@@ -11,7 +12,6 @@ fs.readFile(stylesheetFile, 'utf8', function(err, data) {
   if (err) {
 		console.log(err);
 	}
-	console.log(data);
 	
 	var stylesheetContents = data.replace(/(\r\n|\n|\r)/gm,'').replace(/\t/g, '');
 
@@ -21,14 +21,14 @@ fs.readFile(stylesheetFile, 'utf8', function(err, data) {
     if(err) {
     	console.log(err);
     } else {
-      console.log(namespace + '.bindingHandler.js');
-			child = exec('uglifyjs ' + namespace + '.bindingHandler.js ' + 
-			namespace + '.comparer.js ' + 
-			namespace + '.css.js ' + 
-			namespace + '.dirtyFlag.js ' +
-			namespace + '.renderer.js ' +
-			namespace + '.guid.js ' +
-			'-o ' + namespace + '.js');
+			child = exec('uglifyjs ' + 
+			file + '.bindingHandler.js ' + 
+			file + '.comparer.js ' + 
+			file + '.css.js ' + 
+			file + '.dirtyFlag.js ' +
+			file + '.renderer.js ' +
+			file + '.guid.js ' +
+			'-o ' + file + '.js');
     }
 	});
 	

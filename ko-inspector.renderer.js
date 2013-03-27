@@ -1,8 +1,8 @@
-if (typeof jsonViewer == 'undefined') {
-	jsonViewer = {};
+if (typeof koInspector == 'undefined') {
+	koInspector = {};
 }
 
-jsonViewer.renderer = function() {
+koInspector.renderer = function() {
 	var state = {
 
 	},
@@ -49,7 +49,7 @@ jsonViewer.renderer = function() {
 	},
 
 	arrayToHtml = function(json, guid) {
-		var i, length, output = '<div data-collapser="jsonViewer-' + guid + '" class="collapser "></div>[<span class="ellipsis"></span><ul class="array collapsible">',
+		var i, length, output = '<div data-collapser="ko-inspector-' + guid + '" class="collapser "></div>[<span class="ellipsis"></span><ul class="array collapsible">',
 			hasContents = false;
 		for (i = 0, length = json.length; i < length; i++) {
 			hasContents = true;
@@ -65,7 +65,7 @@ jsonViewer.renderer = function() {
 
 	objectToHtml = function(json, guid) {
 		var i, key, length, keys = Object.keys(json),
-			output = '<div data-collapser="jsonViewer-' + guid + '" class="collapser';
+			output = '<div data-collapser="ko-inspector-' + guid + '" class="collapser';
 			output += '"></div>{<span class="ellipsis"></span><ul class="obj collapsible">',
 			hasContents = false;
 		for (i = 0, length = keys.length; i < length; i++) {
@@ -91,7 +91,7 @@ jsonViewer.renderer = function() {
 
 	jsonToHtml = function(json, root) {
 		var output = '';
-		output += '<div class="jsonViewer">';
+		output += '<div class="ko-inspector">';
 		output += '<ul class="obj collapsible"><li><div class="hoverable"><span class="property">' + root + '</span>: ';
 		output += valueToHtml(json);
 		output += '</div></li></ul>';
@@ -123,8 +123,6 @@ jsonViewer.renderer = function() {
 				state[guid] = 'collapsed';
 				collapsed.parentNode.classList.add("collapsed");
 			}
-
-			console.log(state);
 		}
 	},
 
