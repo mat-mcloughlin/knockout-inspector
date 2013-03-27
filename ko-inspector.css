@@ -90,7 +90,7 @@
     }
 
     .ko-inspector .ellipsis:after {
-        content: " … ";
+        content: " ... ";
     }
 
     .ko-inspector .collapsible {
