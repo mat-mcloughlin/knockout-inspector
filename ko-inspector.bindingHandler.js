@@ -11,7 +11,7 @@
 	 		document.body.addEventListener('click', koInspector.renderer.onToggle, false);
 
 	 		if (allBindingsAccessor().pinToTop) {
-	 			koInspector.renderer.pinToTop(element);	
+	 			koInspector.renderer.pinToTop(element, allBindingsAccessor().pinToTop);	
 	 		};
 			
 			this.bindingHandler.addStyle();
@@ -47,7 +47,7 @@
 		var dataBindString = 'inspect: ' + settings.observable;
 
 		if (settings.pinToTop) {
-			dataBindString += ', pinToTop: true';
+			dataBindString += ', pinToTop: \'' + settings.pinToTop + '\'';
 		};
 
 		var div = document.createElement('div');

@@ -53,7 +53,7 @@ koInspector.renderer = function() {
 			hasContents = false;
 		for (i = 0, length = json.length; i < length; i++) {
 			hasContents = true;
-			output += '<li><div class="hoverable">';
+			output += '<li><div class="hoverable collapsed">';
 			output += valueToHtml(json[i]);
 			if (i < length - 1) output += ',';
 			output += '</div></li>';
@@ -72,8 +72,8 @@ koInspector.renderer = function() {
 			key = keys[i];
 			hasContents = true;
 
-			if (json[key] && json[key].hasOwnProperty('isObservable') && json[key].isObservable) output += '<li><div class="hoverable">';
-			else output += '<li><div class="hoverable nonObservable">';
+			if (json[key] && json[key].hasOwnProperty('isObservable') && json[key].isObservable) output += '<li><div class="hoverable collapsed">';
+			else output += '<li><div class="hoverable nonObservable collapsed">';
 
 			if (json[key] && json[key].hasOwnProperty('count') && json[key].count > 0) output += '<span class="change-counter">' + json[key].count + '</span>';
 			if (json[key] && json[key].hasOwnProperty('subscribers') && (Number(json[key].subscribers) - 2 > 0)) output += '<span class="subscriber-counter">' + (Number(json[key].subscribers) - 2) + '</span>'
@@ -99,10 +99,16 @@ koInspector.renderer = function() {
 		return output;
 	},
 
-	pinToTop = function(element) {
+	pinToTop = function(element, location) {
 		element.style.position = 'absolute';
 		element.style.top = 0;
-		element.style.left = 0;
+		console.log(location);
+		if (location === 'left') {
+			element.style.left = 0;	
+		} else {
+			element.style.right = 0;
+		}
+		
 		element.style.background ='#FFF';
 		element.style.border = 'solid 1px #000';
 		element.style['-moz-box-shadow'] = '4px 4px 4px 0 #CCC';
