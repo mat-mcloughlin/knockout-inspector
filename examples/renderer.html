@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>renderer example</title>
+    <link href="../ko-inspector.css" rel="stylesheet" />
+    <script src="../ko-inspector.guid.js"></script>
+    <script src="../ko-inspector.renderer2.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script type="text/javascript">
+         var testObject = {
+             intProperty: {
+                 count: 1,
+                 isObservable: true,
+                 subscribers: 1,
+                 value: 1
+             },
+             stringProperty: {
+                 isObservable: false,
+                 value: 'string'
+             },
+             boolProperty: {
+                 count: 1,
+                 isObservable: true,
+                 subscribers: 1,
+                 value: true
+             },
+             dateProperty: {
+                 isObservable: false,
+                 value: new Date()
+             },
+             objectProperty: {
+                 isObservable: true,
+                 count: 4,
+                 subscribers: 3,
+                 guid: 'c8ea8f8a-2bc8-60ab-b64f-7434c5ee736d',
+                 value: {
+                     propertyOne: {
+                         count: 1,
+                         isObservable: false,
+                         subscribers: null,
+                         value: 'value'
+                     },
+                     propertyTwo: {
+                         count: 1,
+                         isObservable: false,
+                         subscribers: null,
+                         value: 'value'
+                     }
+                 }
+             },
+             arrayProperty: {
+                 isObservable: true,
+                 count: 4,
+                 subscribers: 3,
+                 guid: '836c2a95-a047-b068-3e94-cf9475c5f525',
+                 value: [
+                     {
+                         count: 1,
+                         isObservable: false,
+                         subscribers: null,
+                         value: 'value'
+                     },
+                     {
+                         count: 1,
+                         isObservable: false,
+                         subscribers: null,
+                         value: 'value'
+                     }
+                 ]
+             }
+         };
+
+         var placeholder = document.getElementById('container'),
+            testClone = JSON.parse(JSON.stringify(testObject)),
+            tree = new Tree(testClone, 'root2', placeholder);
+
+         tree.prepareObject();
+         tree.drawRoot();
+    </script>
+</body>
+</html>

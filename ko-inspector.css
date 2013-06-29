@@ -1,7 +1,17 @@
-.ko-inspector {
+﻿.ko-inspector {
     white-space: normal !important;
-    font-family: monospace;
+    font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
     display: inline-block;
+    padding: 9.5px;
+    font-size: 13px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    color: #333;
+    line-height: 18px;
 }
 
     .ko-inspector ul {
@@ -90,7 +100,7 @@
     }
 
     .ko-inspector .ellipsis:after {
-        content: " ... ";
+        content: " … ";
     }
 
     .ko-inspector .collapsible {
@@ -116,15 +126,17 @@
     }
 
     .ko-inspector .change-counter {
-        background: firebrick;
+        background-color: #04C;
+        background-image: linear-gradient(#08C, #04C);
         color: #FFF;
-        padding: 1px;
+        padding: 0 2px;
         margin-right: 2px;
     }
 
     .ko-inspector .subscriber-counter {
-        background: green;
+        background-color: #51A351;
+        background-image: linear-gradient(#62C462, #51A351);
         color: #FFF;
-        padding: 1px;
+        padding: 0 2px;
         margin-right: 2px;
     }
