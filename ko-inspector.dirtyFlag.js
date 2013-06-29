@@ -1,11 +1,11 @@
 if (typeof koInspector == 'undefined') {
-  koInspector = {};
+    koInspector = {};
 }
 
-koInspector.DirtyFlag = function(root) {
-	var isDirty = ko.observable(false);
-	
-    root.subscribe(function() {
+koInspector.DirtyFlag = function (root) {
+    var isDirty = ko.observable(false);
+
+    root.subscribe(function () {
         if (!isDirty()) {
             isDirty(true);
         }

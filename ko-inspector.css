@@ -56,17 +56,17 @@
         font-weight: bold;
     }
 
-		.ko-inspector .property.nonObservable {
-			color: #808080;
-			font-weight: normal;
-		}
+        .ko-inspector .property.nonObservable {
+            color: #808080;
+            font-weight: normal;
+        }
 
     .ko-inspector .type-null {
         color: gray;
     }
 
     .ko-inspector .type-boolean {
-    		color: firebrick;
+        color: firebrick;
     }
 
     .ko-inspector .type-number {
