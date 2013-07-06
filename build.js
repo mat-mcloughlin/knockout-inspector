@@ -21,14 +21,16 @@ fs.readFile(stylesheetFile, 'utf8', function (err, data) {
         if (err) {
             console.log(err);
         } else {
-            child = exec('uglifyjs ' +
+            var output = exec('uglifyjs ' + 
             file + '.bindingHandler.js ' +
+            file + '.global.js ' +
             file + '.comparer.js ' +
             file + '.css.js ' +
             file + '.dirtyFlag.js ' +
             file + '.renderer.js ' +
             file + '.guid.js ' +
-            '-o ' + file + '.js');
+            '-o build/' + file + '.js');
+            console.log(output);
         }
     });
 

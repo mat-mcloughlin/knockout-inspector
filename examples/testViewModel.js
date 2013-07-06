@@ -1,4 +1,14 @@
-﻿var testViewModel = ko.observable({
+﻿var Child = function (name) {
+    this.name = name;
+};
+
+var childOne = new Child('dave');
+var childTwo = new Child('mat');
+childOne.child = childTwo;
+childTwo.child = childOne;
+
+var testViewModel = ko.observable({
+    child: childOne,    
     doIt: function () {
         this.parent({ child: ko.observable('the') });
         return false;

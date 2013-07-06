@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>index</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <script src="testViewModel.js"></script>
+    <script type="text/javascript" src="../build/ko-inspector.js"></script>
+</head>
+<body>
+    <input data-bind="value: testViewModel().errorId" />
+    <div data-bind="inspect: $root"></div>
+    <div data-bind="inspect: parent"></div>
+</body>
+
+<script>
+    window.onload = function () {
+        ko.applyBindings(testViewModel);
+    };
+</script>
+</html>

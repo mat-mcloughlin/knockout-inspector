@@ -3,7 +3,13 @@ if (typeof koInspector == 'undefined') {
 }
 
 koInspector.DirtyFlag = function (root) {
-    var isDirty = ko.observable(false);
+    var _isDirty = false;
+    var isDirty = function (value) {
+        if (value !== undefined) {
+            _isDirty = value
+        }
+        return _isDirty;
+    };
 
     root.subscribe(function () {
         if (!isDirty()) {

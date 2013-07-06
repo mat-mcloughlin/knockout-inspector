@@ -1,6 +1,6 @@
 ﻿.ko-inspector {
     white-space: normal !important;
-    font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
     display: inline-block;
     padding: 9.5px;
     font-size: 13px;
