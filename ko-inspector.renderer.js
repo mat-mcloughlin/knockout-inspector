@@ -71,7 +71,7 @@ koInspector.Renderer.prototype.draw = function (object) {
     var ellipsis = self.create('span', 'ellipsis');
     var childUl = self.create('ul', 'collapsible');
 
-    span.innerText = self.objectName;
+    span.textContent = self.objectName;
 
     collapser.onclick = function () {
         self.collapserClick.call(self, root, div, childUl, 'root');
@@ -168,17 +168,17 @@ koInspector.Renderer.prototype.drawValue = function (property, value, isLast) {
 
     if (value.count && value.count > 0) {
         var countSpan = self.create('span', 'change-counter');
-        countSpan.innerText = value.count;
+        countSpan.textContent = value.count;
         div.appendChild(countSpan);
     }
 
     if (value.subscribers && value.subscribers > 0) {
         var subscriberSpan = self.create('span', 'subscriber-counter');
-        subscriberSpan.innerText = value.subscribers;
+        subscriberSpan.textContent = value.subscribers;
         div.appendChild(subscriberSpan);
     }
 
-    span.innerText = property;
+    span.textContent = property;
 
     div.appendChild(span);
     div.appendChild(document.createTextNode(': '));
@@ -202,7 +202,7 @@ koInspector.Renderer.prototype.drawValue = function (property, value, isLast) {
 
 koInspector.Renderer.prototype.drawSpan = function (div, value, className) {
     var span = this.create('span', className);
-    span.innerText = value;
+    span.textContent = value;
     div.appendChild(span);
 };
 

@@ -21,9 +21,9 @@ koInspector.Comparer.prototype.addDirtyFlags = function (newObject) {
 
         var unwrapped = ko.utils.unwrapObservable(newObject[p]);
         if (this.isObject(unwrapped)) {
-            if (this.cycleReplacer(unwrapped, this.dirtyFlagCache)) {
-               break;
-            }
+            // if (this.cycleReplacer(unwrapped, this.dirtyFlagCache)) {
+            //    break;
+            // }
             this.addDirtyFlags(unwrapped);
         }
 
@@ -100,9 +100,9 @@ koInspector.Comparer.prototype.updateObject = function (unwrapped, newObject, ob
 koInspector.Comparer.prototype.parseObject = function (unwrapped, newObject, object, p) {
 
     if (this.isObject(unwrapped)) {
-        if (this.cycleReplacer(unwrapped, this.cache)) {
-           return;
-        }
+        // if (this.cycleReplacer(unwrapped, this.cache)) {
+        //    return;
+        // }
         object[p] = {
             value: {},
             count: 0,

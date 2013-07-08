@@ -4,17 +4,37 @@
     <title>index</title>
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
     <script src="testViewModel.js"></script>
-    <script type="text/javascript" src="../build/ko-inspector.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../ko-inspector.css">
+    <script type="text/javascript" src="../ko-inspector.bindingHandler.js"></script>
+    <script type="text/javascript" src="../ko-inspector.comparer.js"></script>
+
+    <script type="text/javascript" src="../ko-inspector.dirtyFlag.js"></script>
+    <script type="text/javascript" src="../ko-inspector.global.js"></script>
+    <script type="text/javascript" src="../ko-inspector.guid.js"></script>
+    <script type="text/javascript" src="../ko-inspector.renderer.js"></script>
 </head>
 <body>
-    <input data-bind="value: testViewModel().errorId" />
-    <div data-bind="inspect: $root"></div>
-    <div data-bind="inspect: parent"></div>
+<button data-bind="click:changeStuff">Change stuff</button>
+        <div data-bind="inspect: $data"></div>
 </body>
 
 <script>
     window.onload = function () {
-        ko.applyBindings(testViewModel);
+       var myRecurringObject = { value: 1 };
+var viewModel = {
+    arr: ko.observableArray([
+        { value: 0 },
+        myRecurringObject,
+        { value: 3 }
+    ]),
+    selected: ko.observable(myRecurringObject),
+    someOtherThingAfterTheRecurringObject: ko.observable(false)
+};
+viewModel.changeStuff = function(){
+    viewModel.someOtherThingAfterTheRecurringObject(!viewModel.someOtherThingAfterTheRecurringObject());
+};
+ko.applyBindings(viewModel);
     };
 </script>
 </html>
